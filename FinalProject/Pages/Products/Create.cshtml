@@ -1,0 +1,70 @@
+﻿@page
+@model FinalProject.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h1>Add A New Novel</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label for="ImageUpload">Photo</label>
+                <input type="file" asp-for="ImageUpload" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.AuthorName" class="control-label"></label>
+                <input asp-for="Product.AuthorName" class="form-control" />
+                <span asp-validation-for="Product.AuthorName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Genre" class="control-label"></label>
+                <input asp-for="Product.Genre" class="form-control" />
+                <span asp-validation-for="Product.Genre" class="text-danger"></span>
+            </div>
+
+@*             <div class="mb-3">
+                <label asp-for="Product.Image" class="control-label"></label>
+                <input asp-for="Product.Image" class="form-control" />
+                <span asp-validation-for="Product.Image" class="text-danger"></span>
+            </div> *@
+
+            <div class="mb-3">
+                <input type="submit" value="Save" class="btn btn-primary" /> &nbsp;&nbsp;
+                <a asp-page="./Index" class="btn btn-outline-dark">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

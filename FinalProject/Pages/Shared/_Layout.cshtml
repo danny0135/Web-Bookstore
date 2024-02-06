@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="bg-dark text-white">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black text-white border-bottom">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a class="navbar-brand text-white" asp-area="" asp-page="/Index" style="font-family: 'Bodoni', serif;">Digital📖Diary</a>
+
+                <div class="d-flex align-items-center">
+                    <div class="cart-container">
+                        <a class="navbar-brand text-white" asp-area="" asp-page="/ShoppingCart">
+                            <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                            <span id="cartCount" class="shape-badge" style="font-size: 10px;">@GetCartCount()</span>
+                        </a>
+                    </div>
+
+                    @functions {
+                        public int GetCartCount()
+                        {
+                            var httpContext = Context.Request.HttpContext;
+                            if (httpContext == null)
+                            {
+                                return 0;
+                            }
+
+                            string cart = httpContext.Request.Cookies["ShoppingCart"];
+                            if (string.IsNullOrEmpty(cart))
+                            {
+                                return 0;
+                            }
+
+                            var cartItems = cart.Split(',');
+                            Dictionary<string, int> productCounts = new Dictionary<string, int>();
+
+                            foreach (var item in cartItems)
+                            {
+                                if (!productCounts.ContainsKey(item))
+                                {
+                                    productCounts[item] = 1;
+                                }
+                                else
+                                {
+                                    productCounts[item]++;
+                                }
+                            }
+
+                            int totalCount = productCounts.Values.Sum();
+
+                            // Output debug information
+                            foreach (var entry in productCounts)
+                            {
+                                System.Diagnostics.Debug.WriteLine("Product ID: " + entry.Key + ", Count: " + entry.Value);
+                            }
+
+                            // Output total count
+                            System.Diagnostics.Debug.WriteLine("Current Cart Count: " + totalCount);
+
+                            return totalCount;
+                        }
+                    }
+
+                    <!-- Toggler button for mobile -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    }
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <!-- Your existing navigation links -->
+                        </ul>
+
+                        <!-- Conditional rendering for authenticated users -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Products/Index">Novels</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Admin/Logout">Logout</a>
+                                </li>
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+@*     @if (ViewData["Title"] != null)
+    {
+        if (ViewData["Title"].ToString() == "Digital Diary")
+        {
+            <div class="banner-image">
+            </div>
+        }
+    } *@
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-white py-0 border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Digital Diary
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

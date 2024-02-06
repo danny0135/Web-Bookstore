@@ -1,0 +1,191 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Digital Diary";
+}
+
+@* <div class="pin-container">
+
+    @foreach (var item in Model.Products)
+    {
+        string imagePath = "/photos/" + item.Image;
+
+        <div class="pin-box">
+            <img src="@imagePath" class="mb-2">
+            <h5 class="card-title">@item.Name</h5>
+            <span class="by-author">
+                by
+                <span>@item.AuthorName</span>
+            </span>
+        </div>
+    }
+
+</div> *@
+<style>
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 200px; /* Adjust the width of the card */
+        background-color: #fff; /* Initial card color */
+        margin: 0 auto; /* Center the card horizontally */
+        text-align: center; /* Center text content */
+        padding: 20px; /* Adjust padding as needed */
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+            background-color: #f8f9fa; /* Change the card color on hover */
+            transform: translateY(-10px);
+        }
+
+    .banner {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%; /* Adjust the width of the banner */
+        background: linear-gradient(to right, #164863, #0f3046); /*Gradient for banner movie thumbnail*/
+        background-color: #164863;
+        margin: 0 auto; /* Center the banner horizontally */
+        padding: 20px; /* Adjust padding as needed */
+        color: #fff; /* Text color */
+    }
+
+        .banner:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px; /* Add margin to separate image and text */
+        }
+
+    .banner-content {
+        padding: 1rem;
+    }
+
+    .banner-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .banner-text {
+        font-size: 1rem;
+        color: #dee2e6; /* Adjust text color */
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        font-size: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to buttons */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darken shadow on hover */
+        }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #3498db;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .button:hover {
+            background-color: #2980b9;
+            color: #fff;
+        }
+
+    .cart-icon {
+        font-size: 1.2rem;
+    }
+
+    .my-card {
+        height: 100%; /* Ensure the card takes up the full height of its container */
+    }
+
+    .card-body {
+        height: 100%; /* Ensure the card body takes up the full height of the card */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-to-cart {
+        margin-top: auto; /* Push the "Add to Cart" button to the bottom of the card body */
+    }
+</style>
+
+
+<div class="banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="banner-content text-center text-md-left">
+                    <h5 class="banner-title">@Model.Products.FirstOrDefault(p => p.ProductId == 4)?.Name</h5>
+                    <p class="banner-text">by @Model.Products.FirstOrDefault(p => p.ProductId == 4)?.AuthorName</p>
+                    <a href="/CustomerDetails?id=4" class="btn btn-primary"><i class="fa-solid fa-bag-shopping"></i>&nbsp;Shop Now</a>
+                    <p class="banner-text mt-2">Limited Stock Available</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <a href="/CustomerDetails?id=4">
+                    <img src="/photos/@Model.Products.FirstOrDefault(p => p.ProductId == 4)?.Image" class="img-fluid border" alt="Product Image">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<h3 class="h5">Featured Novels</h3>
+<hr/>
+
+@* <script>
+    function redirectToProductDetails(productId) {
+        window.location.href = "/CustomerDetails?id=" + productId; // Redirects to the product details page
+    }
+</script> *@
+
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model.Products)
+        {
+            string imagePath = "/photos/" + item.Image;
+
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                <div class="card w-100">
+                    <a href="/CustomerDetails?id=@item.ProductId" class="text-decoration-none">
+                        <div class="text-center">
+                            <img src="@imagePath" class="card-img-top img-fluid" alt="@item.Name">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-dark">@item.Name</h5>
+                            <p class="card-text text-secondary">
+                                <span class="by-author">by <span>@item.AuthorName</span></span>
+                            </p>
+                            <h5 class="card-title text-dark ">$@item.Price</h5>
+                            <div class="add-to-cart">
+                                <a href="/CustomerDetails?id=@item.ProductId" class="button">
+                                    <i class="fas fa-cart-shopping cart-icon" style="color: #ffffff;"></i>&nbsp;
+                                    Add To Cart
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br/>
+<br/>

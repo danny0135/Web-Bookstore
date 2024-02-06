@@ -1,0 +1,130 @@
+﻿@page
+@model FinalProject.Pages.ShoppingCartModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+
+}
+
+<h1>Shopping Cart</h1>
+
+@if (Model.CartProducts.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Thumbnail</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.CartProducts.Count && i < Model.Quantities.Count; i++)
+            {
+                var product = Model.CartProducts[i];
+                var quantity = Model.Quantities[i];
+
+                string imagePath = "/photos/" + product.Image;
+
+                <tr>
+                    <td><img src="@imagePath" class="img-fluid thumbnail"></td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+@*     <div style="display: grid; grid-template-columns: auto auto;">
+        <div><b style="font-size: 1.2em;">Subtotal:</b></div>
+        <div><b style="font-size: 1.2em;">$@Model.TotalPrice</b></div>
+        <div><b style="font-size: 1.2em;">Tax:</b></div>
+        <div><b style="font-size: 1.2em;">$@Model.TaxAmount.ToString("F2")</b></div>
+        <div><b style="font-size: 1.2em;">Delivery Charge:</b></div>
+        <div><b style="font-size: 1.2em;">$@Model.DeliveryCharge</b></div>
+        <div><b style="font-size: 1.2em;">Total Price:</b></div>
+        <div><b style="font-size: 1.2em;">$@Model.FinalPrice.ToString("F2")</b></div>
+
+        <br />
+    </div> *@
+
+
+    <h3>Order Summary</h3>
+    <hr/>
+
+    <div style="display: grid; grid-template-columns: auto auto;">
+
+        <div><b style="font-size: 1.2em;">Total Price Before Tax:</b></div>
+
+        <div><b style="font-size: 1.2em;">$@Model.TotalPriceBeforeTax</b></div>
+
+        <div><b style="font-size: 1.2em;">Tax Amount:</b></div>
+
+        <div><b style="font-size: 1.2em;">$@Model.TaxAmount.ToString("F2")</b></div>
+
+        <div><b style="font-size: 1.2em;">Delivery Charge:</b></div>
+
+        <div><b style="font-size: 1.2em;">$@Model.DeliveryCharge</b></div>
+
+        <div style="font-size: 1.2em; font-weight: bold; color: red">Order Total:</div>
+
+        <div style="font-size: 1.2em; font-weight: bold; color: red">$@Model.OrderTotal.ToString("F2")</div>
+
+        <br />
+
+    </div>
+
+    <br />
+    <a asp-page="/Checkout" class="btn btn-primary" style="margin-right: 20px;">Checkout</a>
+    <a asp-page="/Index" class="btn btn-secondary">Continue Shopping</a>
+
+    <br />
+}
+else
+{
+    <p>Your cart is empty.</p>
+    <a asp-page="/Index">Shop</a>
+}
+
+@* @functions {
+    public int GetCartCount()
+    {
+        var httpContext = Request.HttpContext;
+        if (httpContext == null)
+        {
+            return 0;
+        }
+
+        string cart = httpContext.Request.Cookies["ShoppingCart"];
+        if (string.IsNullOrEmpty(cart))
+        {
+            return 0;
+        }
+
+        var cartItems = cart.Split(',');
+        return cartItems.Length;
+    }
+
+    public List<string> GetCartItems()
+    {
+        var httpContext = Request.HttpContext;
+        if (httpContext == null)
+        {
+            return new List<string>();
+        }
+
+        string cart = httpContext.Request.Cookies["ShoppingCart"];
+        if (string.IsNullOrEmpty(cart))
+        {
+            return new List<string>();
+        }
+
+        var cartItems = cart.Split(',');
+        return cartItems.ToList();
+    }
+} *@

@@ -1,0 +1,96 @@
+﻿@page
+@model FinalProject.Pages.Products.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    string imagePath = "/photos/" + Model.Product.Image;
+}
+
+<br />
+
+@* <h1>@Model.Product.Name Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Thumbnail
+        </dt>
+        <dd class="col-sm-10">
+            <td>
+                <img src="@imagePath" class="img-fluid thumbnail">
+            </td>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.AuthorName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.AuthorName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Description)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Quantity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" class="btn btn-primary" asp-route-id="@Model.Product?.ProductId">Edit</a> &nbsp; &nbsp;
+    <a asp-page="./Index" class="btn btn-outline-dark">Cancel</a>
+</div> *@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            <h2 class="text-center">@Model.Product.Name Details</h2>
+            <br />
+
+            <dl class="row">
+
+                <dt class="col-sm-3">Thumbnail:</dt>
+                <dd class="col-sm-9">
+                    <img src="@imagePath" class="img-fluid" alt="Novel Thumbnail" width="350" height="450">
+                </dd>
+
+                <dt class="col-sm-3">Author:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Product.AuthorName)</dd>
+
+                <dt class="col-sm-3">Genre:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Product.Genre)</dd>
+
+                <dt class="col-sm-3">Description:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Product.Description)</dd>
+
+                <dt class="col-sm-3">Price:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Product.Price)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a asp-page="./Edit" asp-route-id="@Model.Product?.ProductId" class="btn btn-primary">Edit</a>
+        <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
+    </div>
+</div>

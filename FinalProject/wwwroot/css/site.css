@@ -1,0 +1,178 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #DDF2FD !important;
+}
+
+.cart-container {
+    position: relative;
+    display: inline-block; /*Ensure it doesn't span the full width*/
+}
+
+.shape-badge {
+    position: absolute;
+    top: 20%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    display: flex;
+    width: 15px;
+    height: 15px;
+    background-color: #007bff;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.button {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    color: #fff;
+    font-family: "Poppins",sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 3;
+    text-decoration: none;
+    text-transform: none;
+    text-align: center;
+    background-color: #B0A695;
+    border-color: #B0A695;
+    border-radius: 3em;
+    border: 1px solid #B0A695;
+    height: 3em;
+    padding: 0 1.25em;
+    box-sizing: border-box;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    transition: color .2s ease,border-color .2s ease,background-color .2s ease,width .2s ease,outline-color .2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to buttons */
+    transition: background-color 0.3s ease-in-out;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darken shadow on hover */
+    }
+
+.button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .button:hover {
+        background-color: #2980b9;
+        color: #fff;
+    }
+
+.thumbnail {
+    width: 200px;
+}
+
+/* Home page banner image */
+.banner-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("/images/bannerr.png");
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    margin-bottom: 20px;
+/*    background-color: lightgoldenrodyellow;*/
+}
+
+/* Home page image grid layout */
+.pin-container {
+    width: 100%;
+    margin: 20px auto;
+    column-count: 3; /* Use column-count instead of columns */
+    column-gap: 20px;
+}
+
+    .pin-container .pin-box {
+        width: 100%;
+        margin-bottom: 20px;
+        break-inside: avoid;
+        position: relative;
+        page-break-inside: avoid; /* Add this for better page breaks */
+    }
+
+        .pin-container .pin-box img {
+            max-width: 100%;
+            cursor: zoom-in;
+        }
+
+            .pin-container .pin-box img:hover {
+                cursor: zoom-in;
+                filter: brightness(75%);
+            }
+
+.no-bold {
+    font-weight: normal;
+}
+
+@media (max-width: 922px) {
+    .pin-container {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 562px) {
+    .pin-container {
+        column-count: 1;
+    }
+}
+
+/* Adjustments for iPad screens */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .card {
+        width: 250px; /* Adjust the width of the card for iPad */
+        height: auto; /* Reset height to allow proportional resizing */
+    }
+
+    .card-img-top {
+        width: 100%; /* Make the image responsive */
+        height: auto; /* Allow proportional resizing */
+        object-fit: cover; /* Maintain image aspect ratio */
+    }
+
+    /* Additional adjustments for card content in iPad mode */
+    .card-content {
+        padding: 1.5rem;
+    }
+}

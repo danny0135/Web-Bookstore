@@ -1,0 +1,37 @@
+﻿@page
+@model FinalProject.Pages.ConfirmationModel
+@{
+}
+
+<br />
+
+<h1>Confirmation</h1>
+
+<br />
+
+<p>
+    Dear <strong>@Model.Name</strong>,<br />
+
+    <br />
+
+    We are pleased to inform you that your order has been successfully processed and completed. <br />
+
+    <br />
+
+    The confirmation number for your order is: <strong>@Model.ConfirmationNumber</strong>  <br />
+
+    <br />
+
+    Thank you for choosing our services. If you have any questions or need further assistance, please don't hesitate to contact our customer support. <br />
+
+    <br />
+
+    Best regards,
+
+</p>
+
+<a class="navbar-brand text-dark" style="font-family: 'Bodoni', serif;">Digital📖Diary</a>
+<br />
+<br />
+
+<a asp-page="./Index" class="return-link" style="text-align-last">Continue Shopping</a>

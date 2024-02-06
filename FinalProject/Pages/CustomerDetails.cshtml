@@ -1,0 +1,120 @@
+﻿@page
+@model FinalProject.Pages.CustomerDetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    string imagePath = "/photos/" + Model.Product.Image;
+}
+
+<br />
+
+<style>
+
+.smaller-box {
+    width: 50px;
+    padding: 5px; 
+}
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #3498db;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .button:hover {
+            background-color: #2980b9;
+            color: #fff;
+        }
+
+    .cart-icon {
+        font-size: 1.2rem;
+    }
+
+</style>
+
+<div class="container">
+    <section class="sproduct my-1 pt-1">
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-12 col-12">
+                <img src="@imagePath" class="card-img-top img-fluid" alt="Movie Thumbnail">
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-12">
+                <h1 style="font-family: 'Playfair Display', serif; font-weight: bold; font-size: 65px;">@Model.Product.Name</h1>
+
+                <hr />
+                <div class="mb-4">
+                    <h4 style="font-family: 'Playfair Display', serif; font-weight: bold; font-size: 2.5rem; color: #333; margin-bottom: 20px;">Genre:</h4>
+                    <p style="font-size: 1.3rem; color: #666; margin-bottom: 25px;">@Html.DisplayFor(model => model.Product.Genre)</p>
+
+                </div>
+
+                <hr />
+                <div class="mb-4">
+                    <h4 style="font-family: 'Playfair Display', serif; font-weight: bold; font-size: 2.5rem; color: #333; margin-bottom: 20px;">@Html.DisplayFor(model => model.Product.Price)</h4>
+                </div>
+                <hr />
+
+                <div class="mb-4">
+                    <h5>Overview:</h5>
+                    <p style="font-size: 1.3rem; line-height: 1.8; color: #666; margin-bottom: 25px;">@Model.Product.Description</p>
+                </div>
+
+                <hr />
+
+                <div class="mb-3">
+                    <div style="display: inline-block;">
+                        <form method="post" style="display: inline-block;">
+                            <input type="hidden" name="ProductId" value="@Model.Product.ProductId" />
+                            <input type="hidden" name="Name" value="@Model.Product.Name" />
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-cart-shopping cart-icon" style="color: #ffffff;"></i>&nbsp;
+                                Add to Cart
+                            </button>
+                        </form>
+
+                        <a href="./Index" class="btn btn-link" style="margin-left: 10px;">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@* <div class="row related-items">
+    <div class="col-md-12 text-center">
+        <h3>Related Items</h3> <hr/>
+        <div class="row">
+            @if (Model.Product != null)
+            {
+                string imagePathway = "/photos/" + Model.Product.Image;
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="/CustomerDetails?id=@Model.Product.ProductId" class="text-decoration-none">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img src="@imagePathway" class="card-img-top related-item-img" alt="@Model.Product.Name">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-dark">@Model.Product.Name</h5>
+                                <p class="card-text text-secondary">
+                                    <span class="by-author">by <span>@Model.Product.AuthorName</span></span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No product available.</p>
+            }
+        </div>
+    </div>
+</div> *@

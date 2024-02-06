@@ -1,0 +1,138 @@
+﻿@page
+@model FinalProject.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@* <h1>Novels</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-secondary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Product) 
+        {
+            string imagePath = "/photos/" + item.Image;
+            <tr>
+                <td>
+                    <img src="@imagePath" class="img-fluid thumbnail" width="150">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@
+
+<style>
+    .card {
+/*         height: min-content;
+        max-width: 22rem;
+        border: 1px solid #e0e0e0; */
+
+        max-width: 22rem;
+        border: 1px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .card-text {
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .list-group-item {
+        background: none;
+        border: none;
+    }
+</style>
+
+<div class="container mt-2 ">
+    <h1 class="text-center">Explore Novels</h1>
+
+    <div class="text-center">
+        <a asp-page="Create" class="btn btn-primary">Create Novel</a>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        @foreach (var item in Model.Product)
+        {
+            string imagePath = "/photos/" + item.Image;
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@imagePath" class="card-img-top" height="470" alt="@item.Name">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h5 class="card-title">@item.Name</h5>
+                        </div>
+                       
+                        @* <p class="card-text">@item.Description</p> *@
+                        <div class="card-body text-center">
+                            <a asp-page="./Details" asp-route-id="@item.ProductId" class="btn btn-info">Details</a>
+                            <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-secondary">Edit</a>
+                            <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                    @* <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Author(s): @item.AuthorName</li>
+                        <li class="list-group-item">Price: $@item.Price</li>
+                        <li class="list-group-item">Available Quantity: @item.Quantity</li>
+                    </ul> *@
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,202 @@
+﻿@page
+@model FinalProject.Pages.CheckoutModel
+@{
+}
+
+<style>
+    *{
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-transform: capitalize;
+        transition: all .2s linear;
+    }
+
+    .checkout-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .checkout-container form {
+            padding: 20px;
+            width: 700px;
+            background: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        }
+
+            .checkout-container form .row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+                .checkout-container form .row .col {
+                    flex: 1 1 250px;
+                }
+
+                    .checkout-container form .row .col .inputBox {
+                        margin: 15px 0;
+                    }
+
+                        .checkout-container form .row .col .inputBox span {
+                            margin-bottom: 10px;
+                            display: block;
+                        }
+
+                        .checkout-container form .row .col .inputBox input {
+                            width: 100%;
+                            border: 1px solid #ccc;
+                            padding: 10px 15px;
+                            font-size: 15px;
+                            text-transform: none;
+                        }
+
+                            .checkout-container form .row .col .inputBox input:focus {
+                                border: 1px solid #000;
+                            }
+
+                    .checkout-container form .row .col .flex {
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                        .checkout-container form .row .col .flex .inputBox {
+                            margin-top: 5px;
+                        }
+
+                    .checkout-container form .row .col .inputBox img {
+                        height: 34px;
+                        margin-top: 5px;
+                        filter: drop-shadow(0 0 1px #000);
+                    }
+
+            .checkout-container form .submit-btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 17px;
+                background: #000;
+                color: #fff;
+                margin-top: 5px;
+                cursor: pointer;
+            }
+</style>
+
+<br />
+
+<h1>Checkout</h1>
+
+<br />
+
+<div class="checkout-container">
+
+    <form method="post">
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger">@Model.ErrorMessage</div>
+        }
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">Billing Address</h3>
+
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-signature"></i>&nbsp; Full Name</span>
+                    <input asp-for="CheckoutForm.name" class="form-control" />
+                    <span asp-validation-for="CheckoutForm.name" class="text-danger"></span>
+                </div>
+
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-location-pin"></i>&nbsp; Address</span>
+                    <input asp-for="CheckoutForm.address" class="form-control" />
+                    <span asp-validation-for="CheckoutForm.address" class="text-danger"></span>
+                </div>
+
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-city"></i>&nbsp; City</span>
+                    <input asp-for="CheckoutForm.city" class="form-control" />
+                    <span asp-validation-for="CheckoutForm.city" class="text-danger"></span>
+                </div>
+
+                <div class="flex">
+
+                    <div class="inputBox">
+                        <span>Province</span>
+                        <input asp-for="CheckoutForm.province" class="form-control" data-mask="AA" />
+                        <span asp-validation-for="CheckoutForm.province" class="text-danger"></span>
+                    </div>
+
+                    <div class="inputBox">
+                        <span>Postal Code</span>
+                        <input asp-for="CheckoutForm.postalCode" class="form-control" data-mask="AAA AAA" />
+                        <span asp-validation-for="CheckoutForm.postalCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="inputBox">
+                        <span>Country</span>
+                        <input asp-for="CheckoutForm.country" class="form-control" />
+                        <span asp-validation-for="CheckoutForm.country" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <h3 class="title">Payment</h3>
+
+                <div class="inputBox">
+                    <span>Cards Accepted</span>
+                    <img src="images/card_img.png" alt="Bank Card Images">
+                </div>
+
+                <div class="inputBox">
+                    <span><i class="far fa-credit-card"></i>&nbsp; Credit Card Number</span>
+                    <input asp-for="CheckoutForm.ccNumber" class="form-control" placeholder="0000 0000 0000 0000" data-mask="0000000000000000" />
+                    <span asp-validation-for="CheckoutForm.ccNumber" class="text-danger"></span>
+                </div>
+
+                <div class="flex">
+
+                    <div class="inputBox">
+                        <span><i class="far fa-calendar-alt"></i>&nbsp; Expiry Date</span>
+                        <input asp-for="CheckoutForm.ccExpiryDate" class="form-control" placeholder="MMYY" data-mask="0000" />
+                        <span asp-validation-for="CheckoutForm.ccExpiryDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="inputBox">
+                        <span><i class="fas fa-lock"></i>&nbsp; CVV</span>
+                        <input asp-for="CheckoutForm.cvv" class="form-control" placeholder="000" data-mask="000" />
+                        <span asp-validation-for="CheckoutForm.cvv" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button type="submit" class="submit-btn">Place Order</button>
+
+        <br />
+        <br />
+
+        <!-- Link to return to the shopping cart -->
+        <a asp-page="./ShoppingCart" class="return-link" style="text-align-last">Return to Shopping Cart</a>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
